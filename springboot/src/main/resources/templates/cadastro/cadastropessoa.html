@@ -3,6 +3,11 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+ 	<!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
+
 </head>
 <body>
 	<form action="salvarpessoa" method="post">
@@ -15,8 +20,10 @@
 		<label>Idade</label>
 		<input name="idade" type="text"/>
 		
-		<input type="submit" value="Salvar">
+		<input type="submit" class=" waves-effect waves-light btn" value="Salvar" >
 	</form>
+	<br/>
+	<a href="/listapessoas" class="waves-effect waves-light btn">listaPessoas</a>
 	
 	<table>
 		<tr th:each = "pessoa: ${pessoas}">
@@ -28,5 +35,8 @@
 		</tr>
 	</table>
 	
+
+      <!--JavaScript at end of body for optimized loading-->
+      <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
 </body>
 </html>

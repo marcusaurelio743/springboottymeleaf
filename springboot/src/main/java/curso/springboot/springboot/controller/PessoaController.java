@@ -22,10 +22,17 @@ public class PessoaController {
 	}
 	
 	@PostMapping(value = "/salvarpessoa")
-	public String salvar(Pessoa pessoa) {
+	public ModelAndView salvar(Pessoa pessoa) {
 		repository.save(pessoa);
 		
-		return"cadastro/cadastropessoa";
+		ModelAndView andView = new ModelAndView("cadastro/cadastropessoa");
+		//busca no banco todad as pessoas
+		Iterable<Pessoa> pessoasIt = repository.findAll();
+		
+		//relaciona no objeto modelAndView o atibuto pessoas com a lista de pessoas 
+		andView.addObject("pessoas", pessoasIt);
+		
+		return andView;
 	}
 	
 	@GetMapping(value = "/listapessoas")
