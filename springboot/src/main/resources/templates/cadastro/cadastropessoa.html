@@ -11,37 +11,77 @@
 </head>
 <body>
 	 
+	<h3>Spring Boot com thymeleaf</h3><br/>
+	<h5>Cadastro de Pessoa</h5>
 	
-
-	<form method="POST" action="/salvarpessoa" th:object="${pessoaobj}">
+	<div class="row">
+		<form method="POST" action="/salvarpessoa" th:object="${pessoaobj}" class="col s12" id="formPessoa">
+			
+			<div class="row">
+					<div class="input-field col s6">
+						<label for"id" class="active">ID</label>
+						<input name="id" type="text" th:field="*{id}" readonly="readonly" id="id"class="validate"/>
+					</div>
+				
+					<div class="input-field col s6">	
+						<label for="nome" class="active">Nome</label>
+						<input name="nome" type="text" th:field="*{nome}" id="nome" class="validate"/>
+					</div>
+			</div>
+			
+			<div class="row">
+				
+				<div class="input-field col s6">
+					<label for="sobrenome" class="active">Sobrenome</label>
+					<input name="sobrenome" type="text" th:field="*{sobrenome}" id="sobrenome" class="validate"/>
+				</div>
+				
+				<div class="input-field col s6">
+					<label for="idade" class="active">Idade</label>
+					<input name="idade" type="number" th:field="*{idade}" id="idade" class="validate"/>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="input-field col s6">
+					<input type="submit" class=" waves-effect waves-light btn" value="Salvar" >
+					<button class=" waves-effect waves-light btn" onclick="document.getElementById('formPessoa').reset;">Novo</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<br/>
 	
-		<label>ID</label>
-		<input name="id" type="text" th:field="*{id}" readonly="readonly"/>
-		
-		<label>Nome</label>
-		<input name="nome" type="text" th:field="*{nome}"/>
-		
-		<label>Sobrenome</label>
-		<input name="sobrenome" type="text" th:field="*{sobrenome}"/>
-		<label>Idade</label>
-		<input name="idade" type="text" th:field="*{idade}"/>
-		
-		<input type="submit" class=" waves-effect waves-light btn" value="Salvar" >
-	</form>
-	<br/>
-	<br/>
-	<a href="/listapessoas" class="waves-effect waves-light btn">listaPessoas</a>
-	<br/>
 	<br/>
 	
-	<form method="POST" action="/pesquisarpessoa">
-		<label>Pesquisar Por Nome:</label>
-		<input type="text" name="nomepesquisa">
-		<input type="submit" class="waves-effect waves-light btn" value="Pesquisar">
-		
-	</form>
+	<div class="row">
+		<form method="POST" action="/pesquisarpessoa" clas="col s12">
+			<div class="row">
+				<div class="input-field col s12">
+					<label  class="active">Pesquisar Por Nome:</label>
+					
+					<input type="text" name="nomepesquisa" class="validate" >
+					
+					<input type="submit" class="waves-effect waves-light btn" value="Pesquisar" >
+					
+					<a href="/listapessoas" class="waves-effect waves-light btn">listaPessoas</a>
+				</div>
+			</div>
+			
+		</form>
+	</div>
 	
-	<table>
+	<table class="striped">
+		<thead>
+          <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Sobrenome</th>
+              <th>Idade</th>
+              <th>Editar</th>
+              <th>Excluir</th>
+          </tr>
+        </thead>
 		<tr th:each = "pessoa: ${pessoas}">
 			<td th:text = "${pessoa.id}"></td>
 			<td th:text = "${pessoa.nome}"></td>
