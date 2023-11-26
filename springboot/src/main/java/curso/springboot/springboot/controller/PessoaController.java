@@ -27,7 +27,7 @@ public class PessoaController {
 		return andView;
 	}
 	
-	@PostMapping(value = "*/salvarpessoa")
+	@PostMapping(value = "/salvarpessoa")
 	public ModelAndView salvar(Pessoa pessoa) {
 		repository.save(pessoa);
 		
@@ -48,6 +48,17 @@ public class PessoaController {
 		
 		ModelAndView andView = new ModelAndView("cadastro/cadastropessoa");
 		andView.addObject("pessoaobj", pessoa.get());
+		return andView;
+	}
+	
+	@GetMapping(value = "/removerpessoa/{idpessoa}")
+	public ModelAndView excluir(@PathVariable("idpessoa")Long idpessoa) {
+		
+		 repository.deleteById(idpessoa);
+
+		ModelAndView andView = new ModelAndView("cadastro/cadastropessoa");
+		andView.addObject("pessoaobj", new Pessoa());
+		andView.addObject("pessoas", repository.findAll());
 		return andView;
 	}
 	@GetMapping(value = "/listapessoas")

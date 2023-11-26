@@ -10,7 +10,11 @@
 
 </head>
 <body>
-	<form action="salvarpessoa" method="post" th:object=${pessoaobj}>
+	 
+	
+
+	<form method="POST" action="/salvarpessoa" th:object="${pessoaobj}">
+	
 		<label>ID</label>
 		<input name="id" type="text" th:field="*{id}" readonly="readonly"/>
 		
@@ -33,7 +37,8 @@
 			<td th:text = "${pessoa.nome}"></td>
 			<td th:text = "${pessoa.sobrenome}"></td>
 			<td th:text = "${pessoa.idade}"></td>
-			<td><a th:href="@{/editarpessoa/{idpessoa}(idpessoa=${pessoa.id})}">Editar</a></a></a></td>
+			<td><a th:href="@{/editarpessoa/{idpessoa}(idpessoa=${pessoa.id})}">Editar</a></td>
+			<td><a th:href="@{/removerpessoa/{idpessoa}(idpessoa=${pessoa.id})}">Excluir</a></td>
 		
 		</tr>
 	</table>
