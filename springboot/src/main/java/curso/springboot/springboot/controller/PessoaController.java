@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import curso.springboot.springboot.model.Pessoa;
@@ -73,6 +74,16 @@ public class PessoaController {
 		
 		return andView;
 		
+	}
+	@PostMapping(value = "/pesquisarpessoa")
+	public ModelAndView pesquisar(@RequestParam("nomepesquisa") String nomepesquisa) {
+		
+		ModelAndView andView = new ModelAndView("cadastro/cadastropessoa");
+		
+		andView.addObject("pessoas", repository.findPessoaByName(nomepesquisa));
+		andView.addObject("pessoaobj", new Pessoa());
+		
+		return andView;
 	}
 
 }
