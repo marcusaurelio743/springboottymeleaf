@@ -43,6 +43,22 @@
 			</form>
 		
 		</div>
+		
+		<table class="striped">
+			<tr>
+              <th>ID</th>
+              <th>Número:</th>
+              <th>Tipo:</th>
+              <th>Editar</th>
+              <th>Excluir</th>
+         	 </tr>
+			<tr th:each="fone:${telefones}">
+				<td th:text="${fone.id}" ></td>
+				<td th:text="${fone.numero}" ></td>
+				<td th:text="${fone.tipo}"></td>
+				
+			</tr>
+		</table>
 	
 	<br/>
 	<a href="/cadastropessoa" class="waves-effect waves-light btn">Cad.Pessoa</a>

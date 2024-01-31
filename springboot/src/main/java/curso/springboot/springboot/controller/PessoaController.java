@@ -99,6 +99,7 @@ public class PessoaController {
 		
 		ModelAndView andView = new ModelAndView("cadastro/telefones");
 		andView.addObject("pessoaobj", pessoa.get());
+		andView.addObject("telefones", telefoneRepository.getTelefones(id));
 		return andView;
 	}
 	
@@ -109,6 +110,7 @@ public class PessoaController {
 		telefone.setPessoa(pessoa);
 		telefoneRepository.save(telefone);
 		andView.addObject("pessoaobj", pessoa);
+		andView.addObject("telefones", telefoneRepository.getTelefones(pessoaid));
 		
 		return andView;
 	}
