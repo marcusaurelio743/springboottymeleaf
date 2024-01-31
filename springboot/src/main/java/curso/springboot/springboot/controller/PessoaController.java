@@ -7,17 +7,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import curso.springboot.springboot.model.Pessoa;
+import curso.springboot.springboot.model.Telefone;
 import curso.springboot.springboot.repository.PessoaRepository;
+import curso.springboot.springboot.repository.TelefoneRepository;
 
 @Controller
 public class PessoaController {
 	
 	@Autowired
 	private PessoaRepository repository;
+	@Autowired
+	private TelefoneRepository telefoneRepository;
 	
 	
 	@GetMapping(value = "/cadastropessoa")
@@ -96,5 +101,18 @@ public class PessoaController {
 		andView.addObject("pessoaobj", pessoa.get());
 		return andView;
 	}
+	
+	@PostMapping("/adicionarPessoa/{pessoaid}")
+	public ModelAndView addFonePessoa( Telefone telefone, @PathVariable("pessoaid") Long pessoaid) {
+		ModelAndView andView = new ModelAndView("cadastro/telefones");
+		Pessoa pessoa = repository.findById(pessoaid).get();
+		telefone.setPessoa(pessoa);
+		telefoneRepository.save(telefone);
+		andView.addObject("pessoaobj", pessoa);
+		
+		return andView;
+	}
 
+	
+	
 }
