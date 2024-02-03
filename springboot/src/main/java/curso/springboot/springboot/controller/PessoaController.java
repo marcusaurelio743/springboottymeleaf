@@ -77,6 +77,7 @@ public class PessoaController {
 		
 		ModelAndView andView = new ModelAndView("cadastro/cadastropessoa");
 		andView.addObject("pessoaobj", pessoa.get());
+		andView.addObject("pessoas", repository.findAll());
 		return andView;
 	}
 	

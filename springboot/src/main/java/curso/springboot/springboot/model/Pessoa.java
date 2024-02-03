@@ -5,12 +5,16 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 public class Pessoa implements Serializable {
@@ -29,7 +33,7 @@ public class Pessoa implements Serializable {
 	private String sobrenome;
 	private Integer idade;
 	
-	@OneToMany(mappedBy = "pessoa",orphanRemoval = true,cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.REMOVE,mappedBy = "pessoa" )
 	private List<Telefone> telefones;
 	
 	public void setTelefones(List<Telefone> telefones) {
