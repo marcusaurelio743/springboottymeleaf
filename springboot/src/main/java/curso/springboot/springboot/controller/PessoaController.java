@@ -128,9 +128,28 @@ public class PessoaController {
 	
 	@PostMapping("/adicionarPessoa/{pessoaid}")
 	public ModelAndView addFonePessoa( Telefone telefone, @PathVariable("pessoaid") Long pessoaid) {
-		ModelAndView andView = new ModelAndView("cadastro/telefones");
+		
 		Pessoa pessoa = repository.findById(pessoaid).get();
+		
+		if(telefone != null
+				&& (telefone.getNumero() != null && telefone.getNumero().isEmpty()) ||
+				telefone.getNumero() == null) {
+			
+			ModelAndView andView = new ModelAndView("cadastro/telefones");
+			andView.addObject("pessoaobj", pessoa);
+			andView.addObject("telefones", telefoneRepository.getTelefones(pessoaid));
+			
+			List<String> msg = new ArrayList<String>();
+			msg.add("Numero deve ser Informado!!!");
+			andView.addObject("msg", msg);
+			return andView;
+			
+			
+		}
+		
 		telefone.setPessoa(pessoa);
+		
+		ModelAndView andView = new ModelAndView("cadastro/telefones");
 		telefoneRepository.save(telefone);
 		andView.addObject("pessoaobj", pessoa);
 		andView.addObject("telefones", telefoneRepository.getTelefones(pessoaid));

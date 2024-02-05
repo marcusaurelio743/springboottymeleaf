@@ -13,6 +13,12 @@
 	 
 	<h3>Spring Boot com thymeleaf</h3><br/>
 	<h5>Cadastro de Telefones</h5>
+	
+	<br/>
+		<div th:each = "m:${msg}">
+			<span th:text = "${m}"></span>
+		</div>
+	<br/>
 	 
 	<div th:each="p : ${pessoaobj}">
 		<div class="row">
