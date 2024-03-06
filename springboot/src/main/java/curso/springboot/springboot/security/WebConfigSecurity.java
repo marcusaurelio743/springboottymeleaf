@@ -1,5 +1,6 @@
 package curso.springboot.springboot.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -13,6 +14,10 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 public class WebConfigSecurity extends WebSecurityConfigurerAdapter{
+	
+	@Autowired
+	private ImplementacaoUserDetailService implementacaoUserDetailService;
+	
 	
 	@Override//configura as solicitações de acesso por http
 	protected void configure(HttpSecurity http) throws Exception {
@@ -28,10 +33,14 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter{
 	
 	@Override//cria a autenticação do usuario com banco de dados ou memoria
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication().passwordEncoder(new BCryptPasswordEncoder())
+		
+		auth.userDetailsService(implementacaoUserDetailService)
+		.passwordEncoder(new BCryptPasswordEncoder());
+		
+		/*auth.inMemoryAuthentication().passwordEncoder(new BCryptPasswordEncoder())
 		.withUser("marcus")
 		.password("$2a$10$/zpgXIN5ZS6jz54VHjR.FO6uP2ABbu5zYvfjjZ1wpCr.7jgIMInP2")
-		.roles("ADMIN");
+		.roles("ADMIN");*/
 		
 	}
 	
