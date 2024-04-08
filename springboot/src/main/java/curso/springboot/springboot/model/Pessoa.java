@@ -5,16 +5,12 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 public class Pessoa implements Serializable {
@@ -32,7 +28,45 @@ public class Pessoa implements Serializable {
 	@NotNull(message = "sobrenome não pode ser nulo")
 	private String sobrenome;
 	private Integer idade;
+	private String bairro;
+	private String cep;
+	private String cidade;
+	private String rua;
+	private String uf;
 	
+	
+	
+	public String getBairro() {
+		return bairro;
+	}
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+	public String getCep() {
+		return cep;
+	}
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+	public String getCidade() {
+		return cidade;
+	}
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+	public String getRua() {
+		return rua;
+	}
+	public void setRua(String rua) {
+		this.rua = rua;
+	}
+	public String getUf() {
+		return uf;
+	}
+	public void setUf(String uf) {
+		this.uf = uf;
+	}
+
 	@OneToMany(cascade = CascadeType.REMOVE,mappedBy = "pessoa" )
 	private List<Telefone> telefones;
 	
